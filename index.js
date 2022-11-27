@@ -8,7 +8,7 @@ class Node{
     }
 }
 
-class SInglyLinkedList{
+class SinglyLinkedList{
     constructor(){
         this.head = null;
         this.tail = null;
@@ -26,4 +26,52 @@ class SInglyLinkedList{
         this.length++;
         return this;
     }
+    pop(){
+        if(!this.head) return undefined;
+        var current = this.head;
+        var newTail  = current;
+        while(current.next){
+            newTail = current;
+            current = current.next;
+        }
+        this.tail = newTail;
+        this.tail.next = null;
+        this.length--;
+        if(this.length === 0){
+            this.head = null;
+            this.tail = null;
+        }
+        return current;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return currentHead;
+    }
+    unshift(val){
+        var newNode = new Node(val);
+        if(!this.head){
+            this.head = newNode;
+            this.tail = this.head;
+        } else{
+        newNode.next = this.head;
+        this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
 }
+
+let list  = new SinglyLinkedList()
+
+list.unshift("World")
+
+
+
+
+console.log(list)
